@@ -1,6 +1,9 @@
 package com.eloaca.beerapi.service;
 
 import com.eloaca.beerapi.domain.dtos.CervejaDTO;
+import com.eloaca.beerapi.exception.CervejaException;
+
+import java.util.List;
 
 public class CervejaServiceBean implements CervejaService {
 
@@ -15,7 +18,7 @@ public class CervejaServiceBean implements CervejaService {
     }
 
     @Override
-    public List<CervejaDTO> consultarCervejas() {
+    public List<CervejaDTO> consultarCervejas() throws CervejaException {
         return null;
     }
 
