@@ -1,5 +1,7 @@
 package com.eloaca.beerapi.service;
 
+import com.eloaca.beerapi.domain.dtos.CervejaDTO;
+
 public class CervejaServiceBean implements CervejaService {
 
     @Override

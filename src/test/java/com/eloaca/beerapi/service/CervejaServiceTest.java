@@ -1,12 +1,14 @@
 package com.eloaca.beerapi.service;
 
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.Assertions;
+import com.eloaca.beerapi.domain.dtos.CervejaDTO;
+import com.eloaca.beerapi.domain.entitys.Cerveja;
+import com.eloaca.beerapi.domain.enums.MedidaCerveja;
+import com.eloaca.beerapi.domain.enums.TipoCerveja;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
@@ -26,7 +28,7 @@ class CervejaServiceTest {
     @InjectMocks
     private CervejaServiceBean bean;
 
-    @BeforeTestMethod
+    @BeforeEach
     void before(){
         mapper = new CervejaMapper();
     }
@@ -44,7 +46,7 @@ class CervejaServiceTest {
     void consultarCerveja() {
         Cerveja cerveja = mapper.toCerveja(getCervejaDTO());
         when(repository.findById(1L)).thenReturn(cerveja);
-        Cerveja dto = bean.consultarCerveja(1L);
+        CervejaDTO dto = bean.consultarCerveja(1L);
         assertNotNull(dto);
         assertNotNull(mapper.toCerveja(dto));
     }
@@ -69,6 +71,6 @@ class CervejaServiceTest {
     }
 
     public CervejaDTO getCervejaDTO() {
-        return new CervejaDTO("Becks", MediaCerveja.ML, "350", TipoCerveja.MALTE);
+        return new CervejaDTO("Becks", MedidaCerveja.ML, "350", TipoCerveja.PURO_MALTE);
     }
 }
