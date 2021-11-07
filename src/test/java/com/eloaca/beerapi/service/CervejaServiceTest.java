@@ -5,6 +5,7 @@ import com.eloaca.beerapi.domain.entitys.Cerveja;
 import com.eloaca.beerapi.domain.enums.MedidaCerveja;
 import com.eloaca.beerapi.domain.enums.TipoCerveja;
 import com.eloaca.beerapi.exception.CervejaException;
+import com.eloaca.beerapi.mapper.CervejaMapper;
 import com.eloaca.beerapi.repository.CervejaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class CervejaServiceTest {
 
     @BeforeEach
     void before(){
-        mapper = new CervejaMapper();
+        mapper = CervejaMapper.INSTANCE;
     }
 
     @Test
