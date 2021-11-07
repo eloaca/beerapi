@@ -8,7 +8,7 @@ import java.util.List;
 public class CervejaServiceBean implements CervejaService {
 
     @Override
-    public CervejaDTO salvarCerveja(CervejaDTO cerveja) {
+    public CervejaDTO salvarCerveja(CervejaDTO dto) {
         return null;
     }
 

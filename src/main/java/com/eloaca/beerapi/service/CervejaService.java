@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CervejaService {
 
-    CervejaDTO salvarCerveja(CervejaDTO cerveja);
+    CervejaDTO salvarCerveja(CervejaDTO dto);
 
     CervejaDTO consultarCerveja(Long id) throws CervejaException;
 

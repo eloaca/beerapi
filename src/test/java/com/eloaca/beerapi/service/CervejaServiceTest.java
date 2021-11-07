@@ -4,15 +4,17 @@ import com.eloaca.beerapi.domain.dtos.CervejaDTO;
 import com.eloaca.beerapi.domain.entitys.Cerveja;
 import com.eloaca.beerapi.domain.enums.MedidaCerveja;
 import com.eloaca.beerapi.domain.enums.TipoCerveja;
+import com.eloaca.beerapi.exception.CervejaException;
+import com.eloaca.beerapi.repository.CervejaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -43,7 +45,7 @@ class CervejaServiceTest {
     }
 
     @Test
-    void consultarCerveja() {
+    void consultarCerveja() throws CervejaException {
         Cerveja cerveja = mapper.toCerveja(getCervejaDTO());
         when(repository.findById(1L)).thenReturn(cerveja);
         CervejaDTO dto = bean.consultarCerveja(1L);
@@ -52,7 +54,7 @@ class CervejaServiceTest {
     }
 
     @Test
-    void consultarCervejas() {
+    void consultarCervejas() throws CervejaException {
         Cerveja cerveja = mapper.toCerveja(getCervejaDTO());
         List<Cerveja> cervejas = new ArrayList<>();
         cervejas.add(cerveja);
