@@ -25,7 +25,7 @@ class CervejaServiceTest {
     @Mock
     private CervejaRepository repository;
 
-    private final CervejaMapper mapper = CervejaMapper.INSTANCE;;
+    private final CervejaMapper mapper = CervejaMapper.INSTANCE;
 
     @InjectMocks
     private CervejaServiceBean bean;
