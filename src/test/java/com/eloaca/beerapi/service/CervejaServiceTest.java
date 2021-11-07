@@ -7,7 +7,6 @@ import com.eloaca.beerapi.domain.enums.TipoCerveja;
 import com.eloaca.beerapi.exception.CervejaException;
 import com.eloaca.beerapi.mapper.CervejaMapper;
 import com.eloaca.beerapi.repository.CervejaRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,49 +25,42 @@ class CervejaServiceTest {
     @Mock
     private CervejaRepository repository;
 
-    private CervejaMapper mapper;
+    private final CervejaMapper mapper = CervejaMapper.INSTANCE;;
 
     @InjectMocks
     private CervejaServiceBean bean;
 
-    @BeforeEach
-    void before(){
-        mapper = CervejaMapper.INSTANCE;
-    }
-
     @Test
     void salvarUmaNovaCerveja() {
-        Cerveja cerveja = mapper.toCerveja(getCervejaDTO());
-        when(repository.save(Cerveja.class)).thenReturn(cerveja);
-        Cerveja dto = bean.salvarCerveja(mapper.toCerveja(getCervejaDTO()));
+        Cerveja cerveja = mapper.toModel(getCervejaDTO());
+        when(repository.save(any(Cerveja.class))).thenReturn(cerveja);
+        CervejaDTO dto = bean.salvarCerveja(getCervejaDTO());
         assertNotNull(dto);
-        assertNotNull(mapper.toCerveja(dto));
+        assertNotNull(mapper.toModel(dto));
     }
 
     @Test
     void consultarCerveja() throws CervejaException {
-        Cerveja cerveja = mapper.toCerveja(getCervejaDTO());
-        when(repository.findById(1L)).thenReturn(cerveja);
+        Cerveja cerveja = mapper.toModel(getCervejaDTO());
+        when(repository.findById(1L)).thenReturn(java.util.Optional.ofNullable(cerveja));
         CervejaDTO dto = bean.consultarCerveja(1L);
         assertNotNull(dto);
-        assertNotNull(mapper.toCerveja(dto));
+        assertNotNull(mapper.toModel(dto));
     }
 
     @Test
     void consultarCervejas() throws CervejaException {
-        Cerveja cerveja = mapper.toCerveja(getCervejaDTO());
+        Cerveja cerveja = mapper.toModel(getCervejaDTO());
         List<Cerveja> cervejas = new ArrayList<>();
         cervejas.add(cerveja);
         when(repository.findAll()).thenReturn(cervejas);
         List<CervejaDTO> dtos = bean.consultarCervejas();
         assertNotNull(dtos);
-        assertNotNull(mapper.toCerveja(dtos.stream().map(CervejaDTO::new)));
     }
 
     @Test
     void excluirCerveja() {
-        Cerveja cerveja = mapper.toCerveja(getCervejaDTO());
-        when(repository.delete(cerveja));
+        doNothing().when(repository).deleteById(1L);
         boolean b = bean.excluirCerveja(1L);
         assertTrue(b);
     }
