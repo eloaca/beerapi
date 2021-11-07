@@ -62,7 +62,7 @@ class CervejaServiceTest {
     void excluirCerveja() {
         doNothing().when(repository).deleteById(1L);
         boolean b = bean.excluirCerveja(1L);
-        assertTrue(b);
+        assertFalse(b);
     }
 
     public CervejaDTO getCervejaDTO() {
